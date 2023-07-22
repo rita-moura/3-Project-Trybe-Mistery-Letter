@@ -1,6 +1,5 @@
 const buttonCreateLetter = document.getElementById('criar-carta');
 const generatedLetter = document.getElementById('carta-gerada');
-
 const groups = [
   ['newspaper', 'magazine1', 'magazine2'],
   ['medium', 'big', 'reallybig'],
@@ -8,22 +7,21 @@ const groups = [
   ['skewleft', 'skewright'],
 ];
 
-function assignRandomClasses() {
-  const words = generatedLetter.getElementsByTagName('span');
-  Array.from(words).forEach((word) => {
-    const availableGroups = groups.map((group) => [...group]);
-    const assignedClasses = [];
-    availableGroups.forEach((group) => {
-      if (group.length === 0) return;
-      const randomIndex = Math.floor(Math.random() * group.length);
-      const randomClass = group.splice(randomIndex, 1)[0];
-      assignedClasses.push(randomClass);
-    });
-    word.classList.add(...assignedClasses);
+function assignRandomClasses(element) {
+  const availableGroups = groups.map((group) => [...group]);
+  const assignedClasses = [];
+  availableGroups.forEach((group) => {
+    if (group.length === 0) return;
+    const randomIndex = Math.floor(Math.random() * group.length);
+    const randomClass = group.splice(randomIndex, 1)[0];
+    assignedClasses.push(randomClass);
   });
+
+  // eslint-disable-next-line no-param-reassign
+  element.className = assignedClasses.join(' ');
 }
 
-const createLetter = () => {
+function createLetter() {
   const letterText = document.getElementById('carta-texto').value;
 
   if (letterText.trim() === '') {
@@ -33,8 +31,14 @@ const createLetter = () => {
     const letterWithSpans = words.map((word) => `<span>${word}</span>`).join(' ');
     generatedLetter.innerHTML = letterWithSpans;
 
-    assignRandomClasses();
+    const wordSpan = generatedLetter.getElementsByTagName('span');
+    Array.from(wordSpan).forEach((word) => {
+      word.addEventListener('click', () => {
+        assignRandomClasses(word);
+      });
+      assignRandomClasses(word);
+    });
   }
-};
+}
 
 buttonCreateLetter.addEventListener('click', createLetter);
