@@ -1,5 +1,7 @@
 const buttonCreateLetter = document.getElementById('criar-carta');
 const generatedLetter = document.getElementById('carta-gerada');
+const letterCounter = document.getElementById('carta-contador');
+
 const groups = [
   ['newspaper', 'magazine1', 'magazine2'],
   ['medium', 'big', 'reallybig'],
@@ -38,6 +40,7 @@ function createLetter() {
       });
       assignRandomClasses(word);
     });
+    letterCounter.innerText = words.length;
   }
 }
 
