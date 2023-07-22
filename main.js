@@ -1,13 +1,13 @@
-document.getElementById('criar-carta').addEventListener('click', () => {
-  const cartaTexto = document.getElementById('carta-texto').value;
-  const cartaGerada = document.getElementById('carta-gerada');
+const buttonCreateLetter = document.getElementById('criar-carta');
+const generatedLetter = document.getElementById('carta-gerada');
 
-  const palavras = cartaTexto.split(' ');
-  let cartaComSpan = '';
+const createLetter = () => {
+  const letterText = document.getElementById('carta-texto').value;
 
-  for (let i = 0; i < palavras.length; i += 1) {
-    cartaComSpan += `<span>${palavras[i]}</span> `;
-  }
+  const words = letterText.split(' ');
+  const letterWithSpans = words.map((word) => `<span>${word}</span>`).join(' ');
 
-  cartaGerada.innerHTML = cartaComSpan;
-});
+  generatedLetter.innerHTML = letterWithSpans;
+};
+
+buttonCreateLetter.addEventListener('click', createLetter);
