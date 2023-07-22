@@ -51,3 +51,9 @@
   /* stylelint-disable-next-line number-max-precision */
   transform: matrix(1, 0, 0.176327, 1, 0, 0);
 }
+
+.skewright {
+
+  /* stylelint-disable-next-line number-max-precision */
+  transform: matrix(1, 0, -0.176327, 1, 0, 0);
+}
